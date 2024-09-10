@@ -1,0 +1,85 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_casa_dragon"
+    android:padding="16dp">
+
+    <!-- EditText para nombre -->
+    <EditText
+        android:id="@+id/editTextNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        android:padding="10dp"
+        android:background="@android:drawable/edit_text"
+        android:layout_marginTop="100dp"/>
+
+    <!-- EditText para correo electrónico -->
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Correo electrónico"
+        android:padding="10dp"
+        android:background="@android:drawable/edit_text"
+        android:inputType="textEmailAddress"
+        android:layout_below="@id/editTextNombre"
+        android:layout_marginTop="20dp"/>
+
+    <!-- EditText para contraseña -->
+    <EditText
+        android:id="@+id/editTextContrasena"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:padding="10dp"
+        android:background="@android:drawable/edit_text"
+        android:inputType="textPassword"
+        android:layout_below="@id/editTextEmail"
+        android:layout_marginTop="20dp"/>
+
+    <!-- Spinner para seleccionar Bando Favorito -->
+    <Spinner
+        android:id="@+id/spinnerBando"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextContrasena"
+        android:layout_marginTop="20dp"
+        android:entries="@array/bandos_array"
+        android:spinnerMode="dropdown" />
+
+    <!-- Spinner para seleccionar Casa Favorita -->
+    <Spinner
+        android:id="@+id/spinnerCasa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerBando"
+        android:layout_marginTop="20dp"
+        android:entries="@array/casas_array"
+        android:spinnerMode="dropdown" />
+
+    <!-- Botón para crear o modificar el perfil -->
+    <Button
+        android:id="@+id/btnGuardarPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guardar Perfil"
+        android:layout_below="@id/spinnerCasa"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#B8860B"
+        android:textColor="#FFFFFF" />
+
+    <!-- Botón para eliminar el perfil -->
+    <Button
+        android:id="@+id/btnEliminarPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eliminar Perfil"
+        android:layout_below="@id/btnGuardarPerfil"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#8B0000"
+        android:textColor="#FFFFFF" />
+
+</RelativeLayout>

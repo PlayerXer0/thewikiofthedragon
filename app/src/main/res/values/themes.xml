@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Thewikiofthedragon" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Personaliza tu tema aquí si es necesario -->
+    </style>
+
+    <style name="Theme.Thewikiofthedragon" parent="Base.Theme.Thewikiofthedragon" />
+</resources>

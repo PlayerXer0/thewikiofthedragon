@@ -1,0 +1,38 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="#1C1C1C"
+    android:padding="8dp"
+    android:layout_gravity="center"
+    android:elevation="4dp"> <!-- Esta línea debe estar correctamente cerrada -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Imagen del personaje -->
+        <ImageView
+            android:id="@+id/characterImageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/rhae" /> <!-- Reemplaza con una imagen válida -->
+
+        <!-- Nombre del personaje -->
+        <TextView
+            android:id="@+id/characterNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#FFD700"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="Nombre del personaje" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Imagen de fondo que cubre toda la pantalla -->
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/pantalladelosnegros"
+    android:scaleType="fitXY"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true" />
+
+    <!-- Botones para elegir "Personajes" o "Dragones" -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_centerInParent="true">
+
+        <!-- Botón "Personajes" con estilo personalizado -->
+        <Button
+            android:id="@+id/btnCharacters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personajes"
+            android:textSize="18sp"
+            android:textColor="#FFD700"
+        android:background="@drawable/button_background_black_red"
+        android:padding="12dp"
+        android:layout_marginEnd="16dp"/>
+
+        <!-- Botón "Dragones" con estilo personalizado -->
+        <Button
+            android:id="@+id/btnDragon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dragones"
+            android:textSize="18sp"
+            android:textColor="#FFD700"
+        android:background="@drawable/button_background_black_red"
+        android:padding="12dp"/>
+    </LinearLayout>
+
+    <!-- RecyclerView para personajes (inicialmente oculto) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/blackFactionRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnCharacters"
+        android:layout_marginTop="24dp"
+        android:visibility="gone" />
+
+</RelativeLayout>

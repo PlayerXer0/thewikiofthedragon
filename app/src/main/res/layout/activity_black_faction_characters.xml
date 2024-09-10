@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Título o encabezado opcional -->
+    <TextView
+        android:id="@+id/blackFactionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Personajes del Bando Negro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:padding="16dp"
+        android:textColor="#FFD700" />
+
+    <!-- RecyclerView para mostrar la lista de personajes -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/blackFactionRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/blackFactionTitle"
+        android:layout_marginTop="16dp"
+        android:scrollbars="vertical" />
+</RelativeLayout>

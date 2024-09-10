@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">thewikiofthedragon</string>
+    <string name="character_image">Character Image</string>
+    <string name="bando_negro">Bando Negro</string>
+    <string name="bando_verde">Bando Verde</string>
+    <!-- Array de Bandos -->
+    <string-array name="bandos_array">
+        <item>Verde</item>
+        <item>Negro</item>
+    </string-array>
+
+    <!-- Array de Casas -->
+    <string-array name="casas_array">
+        <item>Targaryen</item>
+        <item>Velaryon</item>
+        <item>Hightower</item>
+        <item>Strong</item>
+    </string-array>
+</resources>
