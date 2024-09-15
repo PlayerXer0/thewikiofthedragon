@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,39 +11,39 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Crear tu perfil"
+        android:text="Bienvenido"
         android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="@color/gold"
         android:fontFamily="serif"
         android:layout_marginBottom="24dp" />
 
-    <!-- EditText para Nombre -->
+    <!-- EditText para Nickname -->
     <EditText
-        android:id="@+id/editTextNombre"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="Nombre"
-    android:padding="10dp"
-    android:background="@android:drawable/edit_text"
-    android:textColor="@color/white"
-    android:textColorHint="@color/light_gray"
-    android:layout_marginBottom="16dp" />
+        android:id="@+id/editTextNickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/edit_text"
+        android:hint="Nickname"
+        android:textColorHint="@color/light_gray"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="16dp"/>
 
     <!-- EditText para Contraseña -->
     <EditText
-        android:id="@+id/editTextContrasena"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="Contraseña"
-    android:inputType="textPassword"
-    android:padding="10dp"
-    android:background="@android:drawable/edit_text"
-    android:textColor="@color/white"
-    android:textColorHint="@color/light_gray"
-    android:layout_marginBottom="16dp" />
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:background="@android:drawable/edit_text"
+        android:textColor="@color/black"
+        android:textColorHint="@color/light_gray"
+        android:layout_marginBottom="16dp" />
 
-    <!-- RadioGroup para Bando Favorito -->
+    <!-- RadioGroup para seleccionar el bando -->
     <RadioGroup
         android:id="@+id/radioGroupBando"
         android:layout_width="match_parent"
@@ -66,24 +67,24 @@
             android:layout_marginLeft="16dp"/>
     </RadioGroup>
 
-    <!-- Botón para Guardar Perfil -->
+    <!-- Botón para Logear -->
     <Button
-        android:id="@+id/btnGuardarPerfil"
+        android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Guardar Perfil"
+        android:text="Logear"
         android:backgroundTint="@color/dark_red"
         android:textColor="@color/gold"
         android:textStyle="bold"
         android:padding="16dp"
         android:layout_marginBottom="16dp" />
 
-    <!-- Botón para Eliminar Perfil -->
+    <!-- Botón para Crear Perfil -->
     <Button
-        android:id="@+id/btnEliminarPerfil"
+        android:id="@+id/buttonCreateProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Eliminar Perfil"
+        android:text="Crear perfil"
         android:backgroundTint="@color/dark_red"
         android:textColor="@color/gold"
         android:textStyle="bold"

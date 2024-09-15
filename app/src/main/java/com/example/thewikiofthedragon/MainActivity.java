@@ -26,18 +26,6 @@ public class MainActivity extends AppCompatActivity {
         videoView.setOnCompletionListener(mp -> videoView.start()); // Reproduce el video en bucle
         videoView.start();
 
-        // Botón de creación de perfil
-        ImageButton btnCrearPerfil = findViewById(R.id.btnCrearPerfil);
-
-        // Listener para abrir la actividad de creación de perfil
-        btnCrearPerfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PerfilUsuarioActivity.class);
-                startActivity(intent);
-            }
-        });
-
         // Botones para elegir el Bando Negro o el Bando Verde
         Button buttonBlackFaction = findViewById(R.id.buttonBlackFaction);
         Button buttonGreenFaction = findViewById(R.id.buttonGreenFaction);

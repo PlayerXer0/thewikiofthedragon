@@ -27,8 +27,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String USER_NAME = "nombre";
     private static final String USER_EMAIL = "email";
     private static final String USER_PASSWORD = "contrasena";
-    private static final String USER_BANDO = "bando_favorito"; // Nueva columna para bando favorito
-    private static final String USER_CASA = "casa_favorita";   // Nueva columna para casa favorita
+    private static final String USER_BANDO = "bando_favorito";
+    private static final String USER_CASA = "casa_favorita";
 
     // Constructor
     public DatabaseHelper(Context context) {
@@ -45,39 +45,64 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_BIOGRAPHY + " TEXT NOT NULL)";
         db.execSQL(CREATE_TABLE_CHARACTERS);
 
-        // Crear tabla de usuarios
+        // Crear tabla de usuarios, permitiendo que el campo email sea opcional
         String CREATE_TABLE_USERS = "CREATE TABLE " + TABLE_USERS + " (" +
                 USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 USER_NAME + " TEXT NOT NULL," +
-                USER_EMAIL + " TEXT NOT NULL," +
+                USER_EMAIL + " TEXT," +  // Permitir que el email sea opcional
                 USER_PASSWORD + " TEXT NOT NULL," +
-                USER_BANDO + " TEXT NOT NULL," +          // Nueva columna
-                USER_CASA + " TEXT NOT NULL)";            // Nueva columna
+                USER_BANDO + " TEXT NOT NULL," +
+                USER_CASA + " TEXT NOT NULL)";
         db.execSQL(CREATE_TABLE_USERS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Verificar si es necesario actualizar la base de datos
         if (oldVersion < 2) {
             db.execSQL("ALTER TABLE " + TABLE_CHARACTERS + " ADD COLUMN " + COLUMN_BIOGRAPHY + " TEXT NOT NULL DEFAULT ''");
         }
     }
 
+    // Método para validar el login del usuario
+    public boolean validarLogin(String nickname, String password, String bando) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Convertir a minúsculas y quitar espacios en blanco para evitar problemas de comparación
+        String query = "SELECT * FROM " + TABLE_USERS + " WHERE LOWER(" + USER_NAME + ") = ? AND " +
+                "LOWER(" + USER_PASSWORD + ") = ? AND LOWER(" + USER_BANDO + ") = ?";
+
+        Cursor cursor = db.rawQuery(query,
+                new String[]{nickname.toLowerCase().trim(), password.toLowerCase().trim(), bando.toLowerCase().trim()});
+
+        boolean isValid = cursor.getCount() > 0;
+        cursor.close();
+        db.close();
+        return isValid;
+    }
+
+
     // Método para agregar un usuario con bando y casa favorita
     public long agregarUsuario(String nombre, String email, String contrasena, String bando, String casa) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(USER_NAME, nombre);
-        values.put(USER_EMAIL, email);
-        values.put(USER_PASSWORD, contrasena);
-        values.put(USER_BANDO, bando);
-        values.put(USER_CASA, casa);
 
-        long id = db.insert(TABLE_USERS, null, values);
-        db.close();
+        values.put(USER_NAME, nombre.trim().toLowerCase());
+        values.put(USER_EMAIL, email.trim().toLowerCase());
+        values.put(USER_PASSWORD, contrasena.trim().toLowerCase());
+        values.put(USER_BANDO, bando.trim().toLowerCase());
+        values.put(USER_CASA, casa.trim().toLowerCase());
+
+        long id = -1;
+        try {
+            id = db.insert(TABLE_USERS, null, values);
+        } catch (Exception e) {
+            e.printStackTrace();  // Imprimir error en los logs
+        } finally {
+            db.close();
+        }
         return id;
     }
+
 
     // Método para modificar un usuario
     public int modificarUsuario(int id, String nombre, String email, String contrasena, String bando, String casa) {
@@ -92,12 +117,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.update(TABLE_USERS, values, USER_ID + " = ?", new String[]{String.valueOf(id)});
     }
 
-    // Método para eliminar un usuario
-    public void eliminarUsuario(int id) {
+    // Método para eliminar un usuario por su nickname
+    public boolean eliminarUsuarioPorNickname(String nickname) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_USERS, USER_ID + " = ?", new String[]{String.valueOf(id)});
+
+        // Eliminar el usuario donde el nickname coincida
+        int resultado = db.delete(TABLE_USERS, USER_NAME + " = ?", new String[]{nickname.toLowerCase().trim()});
+
         db.close();
+        // Verificar si se eliminó al menos una fila
+        return resultado > 0;
     }
+
 
     // Método para obtener todos los usuarios
     public List<Usuario> getAllUsuarios() {
