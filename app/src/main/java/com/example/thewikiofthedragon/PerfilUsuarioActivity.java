@@ -1,5 +1,7 @@
 package com.example.thewikiofthedragon;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,23 +9,33 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class PerfilUsuarioActivity extends AppCompatActivity {
 
-    private EditText editTextNombre, editTextContrasena; // Actualizar los nombres de las variables
+    private EditText editTextNombre, editTextContrasena;
     private RadioGroup radioGroupBando;
     private Button buttonCrearPerfil, buttonEliminarPerfil;
     private DatabaseHelper databaseHelper;
+    private VideoView videoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_usuario);
 
-        // Vinculación de las vistas, asegurándose que coincidan con los IDs del XML
-        editTextNombre = findViewById(R.id.editTextNombre); // Este coincide con el XML
-        editTextContrasena = findViewById(R.id.editTextContrasena); // Este coincide con el XML
+        // Configurar el VideoView
+        videoView = findViewById(R.id.backgroundVideoViewProfile);
+        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.videologin);
+        videoView.setVideoURI(videoUri);
+        videoView.setMediaController(null); // Ocultar controles
+        videoView.setOnCompletionListener(mp -> videoView.start()); // Repetir en bucle
+        videoView.start();
+
+        // Vinculación de las vistas
+        editTextNombre = findViewById(R.id.editTextNombre);
+        editTextContrasena = findViewById(R.id.editTextContrasena);
         radioGroupBando = findViewById(R.id.radioGroupBando);
         buttonCrearPerfil = findViewById(R.id.btnGuardarPerfil);
         buttonEliminarPerfil = findViewById(R.id.btnEliminarPerfil);
@@ -89,5 +101,22 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // Métodos para manejar el video
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (videoView != null) {
+            videoView.start(); // Reanuda el video cuando la actividad está en foco
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (videoView != null) {
+            videoView.pause(); // Pausa el video cuando la actividad pierde foco
+        }
     }
 }
