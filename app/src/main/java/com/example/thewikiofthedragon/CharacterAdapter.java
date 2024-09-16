@@ -1,5 +1,6 @@
 package com.example.thewikiofthedragon;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
         void bind(final Character character, final OnItemClickListener listener) {
             characterName.setText(character.getName());
-            characterImage.setImageResource(character.getImageResId()); // Asigna la imagen del personaje
+            characterImage.setImageResource(character.getImageResId());
             itemView.setOnClickListener(v -> listener.onItemClick(character));
         }
     }

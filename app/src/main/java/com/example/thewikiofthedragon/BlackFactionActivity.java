@@ -8,26 +8,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class BlackFactionActivity extends AppCompatActivity {
 
+    private Button btnCharacters;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_black_faction);
 
-        Button btnCharacters = findViewById(R.id.btnCharacters);
-        Button btnDragon = findViewById(R.id.btnDragon);
-
+        // Configurar el botón "Personajes"
+        btnCharacters = findViewById(R.id.btnCharacters);
         btnCharacters.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BlackFactionActivity.this, BlackFactionCharactersActivity.class);
+                // Al hacer clic en el botón "Personajes", ir a la nueva actividad de lista de personajes
+                Intent intent = new Intent(BlackFactionActivity.this, CharacterListActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        btnDragon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Agregar la lógica para abrir la actividad de Lugares si existe
             }
         });
     }
