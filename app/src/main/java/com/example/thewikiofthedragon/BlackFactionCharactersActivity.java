@@ -1,6 +1,8 @@
 package com.example.thewikiofthedragon;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,45 +13,51 @@ public class BlackFactionCharactersActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CharacterAdapter characterAdapter;
     private DatabaseHelper dbHelper;
+    private VideoView videoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_black_faction_characters);
 
+        // Inicializar el VideoView
+        videoView = findViewById(R.id.backgroundVideoViewBlackFaction);
+        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.videologin);
+        videoView.setVideoURI(videoUri);
+        videoView.setMediaController(null);  // Ocultar controles
+        videoView.setOnCompletionListener(mp -> videoView.start());  // Repetir el video en bucle
+        videoView.start();
+
         // Inicializar la base de datos
         dbHelper = new DatabaseHelper(this);
 
-        // Verifica si ya hay personajes en la base de datos
-        if (dbHelper.getAllCharacters().isEmpty()) {
-            // Solo inserta los personajes si la tabla está vacía, con sus biografías
-            dbHelper.addCharacter("Rhaenyra Targaryen", R.drawable.rhae, "Rhaenyra es la primogénita de Viserys I...");
-            dbHelper.addCharacter("Daemon Targaryen", R.drawable.daemon_targaryen, "Daemon Targaryen es el hermano menor de Viserys I...");
-            dbHelper.addCharacter("Jacaerys Velaryon", R.drawable.jaca, "Jacaerys es el hijo mayor de Rhaenyra Targaryen...");
-            dbHelper.addCharacter("Lucerys Velaryon", R.drawable.luce, "Lucerys es el segundo hijo de Rhaenyra...");
-            dbHelper.addCharacter("Joffrey Velaryon", R.drawable.joff, "Joffrey es el hijo menor de Rhaenyra...");
-            dbHelper.addCharacter("Baela Targaryen", R.drawable.baela, "Baela es la hija de Daemon Targaryen...");
-            dbHelper.addCharacter("Rhaena Targaryen", R.drawable.rhaena, "Rhaena es la hermana gemela de Baela...");
-            dbHelper.addCharacter("Rhaenys Targaryen", R.drawable.rhaenys, "Rhaenys es conocida como la Reina que nunca fue...");
-        }
+        // Obtener todos los personajes desde la base de datos
+        List<Character> characterList = dbHelper.getAllCharacters();
 
         // Configurar el RecyclerView
         recyclerView = findViewById(R.id.blackFactionRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        // Obtener todos los personajes del Bando Negro desde la base de datos
-        List<Character> characterList = dbHelper.getAllCharacters();
-
-        // Configurar el adaptador del RecyclerView
+        // Configurar el adaptador
         characterAdapter = new CharacterAdapter(characterList, character -> {
-            // Acciones al hacer clic en un personaje (muestra detalle, por ejemplo)
+            // Acciones al hacer clic en un personaje
         });
         recyclerView.setAdapter(characterAdapter);
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        dbHelper.close();  // Cierra la base de datos cuando ya no se necesite
+    protected void onResume() {
+        super.onResume();
+        if (videoView != null) {
+            videoView.start();  // Reanudar el video al volver a la actividad
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (videoView != null) {
+            videoView.pause();  // Pausar el video al salir de la actividad
+        }
     }
 }

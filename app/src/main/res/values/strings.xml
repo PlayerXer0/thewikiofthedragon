@@ -3,6 +3,7 @@
     <string name="character_image">Character Image</string>
     <string name="bando_negro">Bando Negro</string>
     <string name="bando_verde">Bando Verde</string>
+
     <!-- Array de Bandos -->
     <string-array name="bandos_array">
         <item>Verde</item>
@@ -16,4 +17,14 @@
         <item>Hightower</item>
         <item>Strong</item>
     </string-array>
+
+    <!-- Biografías de personajes -->
+    <string name="biografia_rhaenyra">Rhaenyra Targaryen es la primogénita de Viserys I...</string>
+    <string name="biografia_daemon">Daemon Targaryen es el hermano menor de Viserys I...</string>
+    <string name="biografia_jacaerys">Jacaerys Velaryon es el hijo mayor de Rhaenyra Targaryen...</string>
+    <string name="biografia_lucerys">Lucerys Velaryon es el segundo hijo de Rhaenyra...</string>
+    <string name="biografia_joffrey">Joffrey Velaryon es el hijo menor de Rhaenyra...</string>
+    <string name="biografia_baela">Baela Targaryen es la hija de Daemon Targaryen...</string>
+    <string name="biografia_rhaena">Rhaena Targaryen es la hermana gemela de Baela...</string>
+    <string name="biografia_rhaenys">Rhaenys Targaryen es conocida como la Reina que nunca fue...</string>
 </resources>

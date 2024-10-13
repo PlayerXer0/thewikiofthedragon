@@ -1,26 +1,43 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <!-- Título o encabezado opcional -->
-    <TextView
-        android:id="@+id/blackFactionTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Personajes del Bando Negro"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:padding="16dp"
-        android:textColor="#FFD700" />
-
-    <!-- RecyclerView para mostrar la lista de personajes -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/blackFactionRecyclerView"
+    <!-- Video de fondo -->
+    <VideoView
+        android:id="@+id/backgroundVideoViewBlackFaction"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/blackFactionTitle"
-        android:layout_marginTop="16dp"
-        android:scrollbars="vertical" />
-</RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop" />
+
+    <!-- Contenedor que se muestra sobre el video -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal">
+
+        <!-- Título o encabezado opcional -->
+        <TextView
+            android:id="@+id/blackFactionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personajes del Bando Negro"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:textColor="#FFD700"
+            android:gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <!-- RecyclerView para mostrar la lista de personajes -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/blackFactionRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="vertical" />
+    </LinearLayout>
+
+</FrameLayout>

@@ -64,15 +64,16 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Obtener el bando seleccionado
                 RadioButton selectedBando = findViewById(selectedBandoId);
                 String bando = selectedBando.getText().toString();
 
-                // Intentar agregar el usuario
                 long id = databaseHelper.agregarUsuario(nombre, "", contrasena, bando, "");
                 if (id > 0) {
                     Toast.makeText(PerfilUsuarioActivity.this, "Perfil creado exitosamente", Toast.LENGTH_SHORT).show();
-                    finish(); // Regresar al login después de crear el perfil
+                    finish();
+
+                    // Animación de regreso
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 } else {
                     Toast.makeText(PerfilUsuarioActivity.this, "Error al crear el perfil. Revisa los datos e inténtalo de nuevo.", Toast.LENGTH_SHORT).show();
                 }
@@ -90,12 +91,13 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Eliminar el perfil de la base de datos
                 boolean eliminado = databaseHelper.eliminarUsuarioPorNickname(nombre);
-
                 if (eliminado) {
                     Toast.makeText(PerfilUsuarioActivity.this, "Perfil eliminado exitosamente", Toast.LENGTH_SHORT).show();
-                    finish(); // Regresar al login después de eliminar el perfil
+                    finish();
+
+                    // Animación de regreso
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 } else {
                     Toast.makeText(PerfilUsuarioActivity.this, "Error al eliminar el perfil. Revisa el nombre.", Toast.LENGTH_SHORT).show();
                 }
@@ -103,7 +105,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         });
     }
 
-    // Métodos para manejar el video
     @Override
     protected void onResume() {
         super.onResume();

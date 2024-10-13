@@ -1,7 +1,7 @@
 package com.example.thewikiofthedragon;
 
 import android.content.Intent;
-import android.net.Uri;  // Asegúrate de importar Uri
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-import android.widget.VideoView;  // Asegúrate de importar VideoView
+import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -42,6 +42,18 @@ public class LoginActivity extends AppCompatActivity {
         buttonCreateProfile = findViewById(R.id.buttonCreateProfile);
         databaseHelper = new DatabaseHelper(this);
 
+        // Botón para ir a la actividad de crear perfil
+        buttonCreateProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, PerfilUsuarioActivity.class);
+                startActivity(intent);
+
+                // Añadir la animación de transición
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+
         // Botón de login
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,9 +82,6 @@ public class LoginActivity extends AppCompatActivity {
                 RadioButton selectedBando = findViewById(selectedBandoId);
                 String bando = selectedBando.getText().toString();
 
-                // Agregar logs para depurar
-                Log.d("LoginDebug", "Nickname: " + nickname + ", Password: " + password + ", Bando: " + bando);
-
                 try {
                     // Verificar las credenciales
                     if (databaseHelper.validarLogin(nickname, password, bando)) {
@@ -85,24 +94,13 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Credenciales incorrectas o usuario no registrado", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    // Mostrar una advertencia si ocurre algún error inesperado
                     Toast.makeText(LoginActivity.this, "Ocurrió un error. Verifica los datos e inténtalo de nuevo.", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();  // Para depuración
+                    e.printStackTrace();
                 }
-            }
-        });
-
-        // Botón para ir a la actividad de crear perfil
-        buttonCreateProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, PerfilUsuarioActivity.class);
-                startActivity(intent);
             }
         });
     }
 
-    // Métodos para manejar el video
     @Override
     protected void onResume() {
         super.onResume();
