@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Título para Dragones del Bando Negro -->
+    <TextView
+        android:id="@+id/blackDragonTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dragones del Bando Negro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:padding="16dp"
+        android:textColor="#FFD700"
+        android:layout_marginBottom="8dp" />
+
+    <!-- RecyclerView para mostrar los dragones -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/blackDragonRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/blackDragonTitle"
+        android:layout_marginTop="16dp"
+        android:scrollbars="vertical" />
+</RelativeLayout>

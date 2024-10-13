@@ -33,7 +33,7 @@ android {
 
 dependencies {
 
-
+    implementation ("androidx.cardview:cardview:1.0.0") // Versión actualizada
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

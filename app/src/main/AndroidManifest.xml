@@ -17,6 +17,10 @@
             android:name=".BlackFactionCharactersActivity"
             android:exported="false" />
 
+
+        <activity
+            android:name=".BlackDragonActivity" />
+
         <activity
             android:name=".CharacterListActivity"
             android:exported="false" />

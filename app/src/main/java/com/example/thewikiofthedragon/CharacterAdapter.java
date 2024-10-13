@@ -1,6 +1,7 @@
 package com.example.thewikiofthedragon;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,19 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
         void bind(final Character character, final OnItemClickListener listener) {
             characterName.setText(character.getName());
             characterImage.setImageResource(character.getImageResId());
-            itemView.setOnClickListener(v -> listener.onItemClick(character));
+
+            // Depuración de datos en Logcat
+            Log.d("CharacterAdapter", "Name: " + character.getName());
+            Log.d("CharacterAdapter", "Biography: " + character.getBiography());
+
+            itemView.setOnClickListener(v -> {
+                // Pasar los datos a la actividad de detalles
+                Intent intent = new Intent(v.getContext(), CharacterDetailActivity.class);
+                intent.putExtra("characterName", character.getName());
+                intent.putExtra("characterImage", character.getImageResId());
+                intent.putExtra("characterBiography", character.getBiography());
+                v.getContext().startActivity(intent);
+            });
         }
     }
 }
