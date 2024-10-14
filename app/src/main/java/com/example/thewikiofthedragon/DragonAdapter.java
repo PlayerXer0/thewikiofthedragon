@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
+import android.content.Intent;
+
 
 public class DragonAdapter extends RecyclerView.Adapter<DragonAdapter.DragonViewHolder> {
 
@@ -32,8 +34,19 @@ public class DragonAdapter extends RecyclerView.Adapter<DragonAdapter.DragonView
 
     @Override
     public void onBindViewHolder(@NonNull DragonViewHolder holder, int position) {
-        holder.bind(dragonList.get(position), listener);
+        Dragon dragon = dragonList.get(position);
+        holder.bind(dragon, listener);
+
+        // Lanzar la actividad de detalle al hacer clic en un dragón
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), DragonDetailActivity.class);
+            intent.putExtra("dragonName", dragon.getName());
+            intent.putExtra("dragonImage", dragon.getImageResId());
+            intent.putExtra("dragonBiography", dragon.getBiography());
+            v.getContext().startActivity(intent);
+        });
     }
+
 
     @Override
     public int getItemCount() {

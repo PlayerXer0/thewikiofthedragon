@@ -1,27 +1,43 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <!-- Título para Dragones del Bando Negro -->
-    <TextView
-        android:id="@+id/blackDragonTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dragones del Bando Negro"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:padding="16dp"
-        android:textColor="#FFD700"
-        android:layout_marginBottom="8dp" />
-
-    <!-- RecyclerView para mostrar los dragones -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/blackDragonRecyclerView"
+    <!-- Video de fondo -->
+    <VideoView
+        android:id="@+id/backgroundVideoViewBlackDragons"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/blackDragonTitle"
-        android:layout_marginTop="16dp"
-        android:scrollbars="vertical" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop" />
+
+    <!-- Contenedor que se muestra sobre el video -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal"
+        android:background="#80000000"> <!-- Fondo semitransparente sobre el video -->
+
+        <!-- Título -->
+        <TextView
+            android:id="@+id/blackDragonTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dragones del Bando Negro"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:textColor="#FFD700"
+            android:layout_gravity="center" />
+
+        <!-- RecyclerView para mostrar la lista de dragones -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/blackDragonRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="vertical" />
+
+    </LinearLayout>
 </RelativeLayout>

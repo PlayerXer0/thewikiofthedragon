@@ -25,6 +25,10 @@
             android:name=".CharacterListActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".DragonDetailActivity" />
+
+
         <!-- Registrar CharacterDetailActivity -->
         <activity
             android:name=".CharacterDetailActivity"
