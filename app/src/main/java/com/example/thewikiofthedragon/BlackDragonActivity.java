@@ -25,14 +25,20 @@ public class BlackDragonActivity extends AppCompatActivity {
         Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.videologin);
         videoView.setVideoURI(videoUri);
         videoView.setMediaController(null);  // Ocultar controles
-        videoView.setOnCompletionListener(mp -> videoView.start());  // Repetir en bucle
+
+        // Configurar el video para que se ajuste al tamaño de la pantalla
+        videoView.setOnPreparedListener(mp -> {
+            mp.setLooping(true);
+            mp.setVideoScalingMode(android.media.MediaPlayer.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
+        });
+
         videoView.start();
 
         // Inicializar la base de datos
         dbHelper = new DatabaseHelper(this);
 
         // Obtener todos los dragones del Bando Negro desde la base de datos
-        List<Dragon> dragonList = dbHelper.getAllBlackDragons();  // Método que luego definimos en DatabaseHelper
+        List<Dragon> dragonList = dbHelper.getAllBlackDragons();
 
         // Configurar el RecyclerView
         recyclerView = findViewById(R.id.blackDragonRecyclerView);

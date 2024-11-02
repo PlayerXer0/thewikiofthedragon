@@ -1,13 +1,14 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:background="@android:color/transparent"
     android:padding="8dp"
     android:layout_gravity="center"
-    android:cardElevation="8dp"
-    android:cardBackgroundColor="#99000000"
-    android:cardCornerRadius="12dp">
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="#99000000"
+    app:cardCornerRadius="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +24,7 @@
             android:scaleType="centerCrop"
             android:background="@drawable/border_image"
             android:padding="2dp"
-            android:src="@drawable/caraxes" /> <!-- Reemplaza con la imagen correspondiente -->
+            android:src="@drawable/caraxes" />
 
         <!-- Nombre del dragón -->
         <TextView

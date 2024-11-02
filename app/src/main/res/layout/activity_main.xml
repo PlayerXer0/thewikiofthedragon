@@ -26,11 +26,6 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:tint="#FFFFFF" />
 
-    <!-- Imagen de la Reina Negra, sobre el botón del Bando Negro -->
-
-    <!-- Imagen de la Reina Verde, sobre el botón del Bando Verde -->
-
-    <!-- Botón para el Bando Verde -->
 
     <ImageView
         android:id="@+id/imageViewBlackQueen"
