@@ -28,6 +28,12 @@
         <activity
             android:name=".DragonDetailActivity" />
 
+        <activity
+            android:name=".GreenFactionCharactersActivity" />
+
+        <activity android:name=".GreenDragonActivity" />
+
+
 
         <!-- Registrar CharacterDetailActivity -->
         <activity

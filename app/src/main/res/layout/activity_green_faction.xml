@@ -1,46 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/green_faction_background">
 
-    <!-- Botones para elegir "Personajes" o "Lugares" -->
+    <!-- Imagen de fondo -->
+    <ImageView
+        android:id="@+id/backgroundImageGreenFaction"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/pantalladelosverdes"
+        android:scaleType="fitXY" />
+
+    <!-- Botones para elegir "Personajes" o "Dragones" -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/btnCharacters"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Personajes" />
-
-        <Button
-            android:id="@+id/btnPlaces"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lugares"
-            android:layout_marginStart="16dp" />
-    </LinearLayout>
-
-    <!-- RecyclerView para personajes -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/greenFactionRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
-        android:visibility="gone"/> <!-- Inicialmente oculto -->
-
-    <!-- Placeholder para otros contenidos -->
-    <TextView
-        android:id="@+id/placeholderText"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Selecciona una opción para ver el contenido"
         android:gravity="center"
-        android:textSize="18sp" />
+        android:layout_centerInParent="true">
 
-</LinearLayout>
+        <!-- Botón "Personajes" -->
+        <Button
+            android:id="@+id/btnGreenCharacters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personajes"
+            android:textSize="18sp"
+            android:textColor="@color/gold"
+            android:background="@drawable/button_background_green"
+            android:padding="12dp"
+            android:layout_marginEnd="16dp" />
+
+        <!-- Botón "Dragones" -->
+        <Button
+            android:id="@+id/btnGreenDragons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dragones"
+            android:textSize="18sp"
+            android:textColor="@color/gold"
+            android:background="@drawable/button_background_green"
+            android:padding="12dp" />
+    </LinearLayout>
+</RelativeLayout>

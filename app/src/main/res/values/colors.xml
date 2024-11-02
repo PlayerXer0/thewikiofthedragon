@@ -6,4 +6,8 @@
     <color name="gold">#FFD700</color>
     <color name="dark_gray">#1C1C1C</color>
     <color name="light_gray">#BDBDBD</color>
+    <color name="green_faction_primary">#4CAF50</color> <!-- Verde primario para botones y marcos -->
+    <color name="green_faction_background">#1A3D23</color> <!-- Fondo oscuro con tono verde -->
+    <color name="green_faction_text">#A8D5A0</color> <!-- Verde claro para texto -->
+    <color name="green_faction_highlight">#388E3C</color> <!-- Verde oscuro para resaltar -->
 </resources>

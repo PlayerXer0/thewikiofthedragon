@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/green_faction_background">
 
-    <!-- RecyclerView para mostrar personajes del Bando Verde -->
+    <!-- RecyclerView para mostrar personajes del bando verde -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewGreenFactionCharacters"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:scrollbars="vertical" />
+</RelativeLayout>

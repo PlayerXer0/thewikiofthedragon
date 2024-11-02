@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
-        <shape android:shape="rectangle">
-            <solid android:color="#00FF00"/> <!-- Color verde para el estado presionado -->
+        <shape>
+            <solid android:color="@color/green_faction_highlight" />
+            <corners android:radius="12dp" />
         </shape>
     </item>
     <item>
-        <shape android:shape="rectangle">
-            <solid android:color="#009900"/> <!-- Color verde oscuro para el estado normal -->
+        <shape>
+            <solid android:color="@color/green_faction_primary" />
+            <corners android:radius="12dp" />
         </shape>
     </item>
 </selector>
