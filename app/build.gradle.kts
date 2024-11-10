@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id ("com.google.gms.google-services")
 }
 
 android {
@@ -33,7 +34,7 @@ android {
 
 dependencies {
 
-
+    implementation ("com.google.firebase:firebase-firestore:24.4.0")
     implementation ("androidx.recyclerview:recyclerview:1.2.1")
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation(libs.cardview)

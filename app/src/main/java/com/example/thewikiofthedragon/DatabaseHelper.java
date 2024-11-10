@@ -8,11 +8,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
+import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "dragonDatabase.db";
     private static final int DATABASE_VERSION = 4; // Incrementa la versión para activar onUpgrade
+    private FirebaseFirestore firestore;
 
     // Tabla de personajes
     private static final String TABLE_CHARACTERS = "characters";
@@ -42,8 +47,52 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Constructor
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        firestore = FirebaseFirestore.getInstance(); // Inicializa Firestore
     }
 
+    public void syncCharacterToFirebase(Character character) {
+        Map<String, Object> characterData = new HashMap<>();
+        characterData.put("name", character.getName());
+        characterData.put("imageResId", character.getImageResId());
+        characterData.put("biography", character.getBiography());
+
+        firestore.collection("characters").document(character.getName())
+                .set(characterData)
+                .addOnSuccessListener(aVoid -> Log.d("FirebaseSync", "Personaje sincronizado en Firebase"))
+                .addOnFailureListener(e -> Log.e("FirebaseSync", "Error al sincronizar personaje", e));
+    }
+
+    public void addCharacter(Character character) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME, character.getName());
+        values.put(COLUMN_IMAGE, character.getImageResId());
+        values.put(COLUMN_BIOGRAPHY, character.getBiography());
+
+        long id = db.insert(TABLE_CHARACTERS, null, values);
+        if (id == -1) {
+            Log.e("DatabaseInsert", "Error al insertar el personaje: " + character.getName());
+        } else {
+            Log.d("DatabaseInsert", "Personaje insertado: " + character.getName());
+        }
+        db.close();
+    }
+
+    public void syncUserToFirebase(String nombre, String email, String contrasena, String bando, String casa) {
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("nombre", nombre);
+        userData.put("email", email);
+        userData.put("contrasena", contrasena);
+        userData.put("bando_favorito", bando);
+        userData.put("casa_favorita", casa);
+
+        firestore.collection("users").document(nombre)
+                .set(userData)
+                .addOnSuccessListener(aVoid -> Log.d("FirebaseSync", "Usuario sincronizado en Firebase"))
+                .addOnFailureListener(e -> Log.e("FirebaseSync", "Error al sincronizar usuario", e));
+    }
+
+    //personajes bando verde
     public List<Character> getAllGreenCharacters() {
         List<Character> characterList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -64,6 +113,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return characterList;
     }
+
+    //personajes bando negro
+    public List<Character> getAllBlackCharacters() {
+        List<Character> characterList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CHARACTERS + " WHERE " + COLUMN_FACTION + " = ?", new String[]{"Negro"});
+
+        if (cursor.moveToFirst()) {
+            do {
+                Character character = new Character(
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_IMAGE)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_BIOGRAPHY))
+                );
+                characterList.add(character);
+            } while (cursor.moveToNext());
+        } else {
+            Log.d("DatabaseDebug", "No se encontraron personajes del Bando Negro en la base de datos.");
+        }
+        cursor.close();
+        return characterList;
+    }
+
 
 
     // Método para obtener todos los dragones del Bando Verde
@@ -123,6 +195,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertInitialCharacters(db);
         insertInitialGreenCharacters(db);
         insertInitialDragons(db);
+        insertInitialGreenDragons(db);
 
         Log.d("DatabaseHelper", "Tablas y datos iniciales creados.");
     }
@@ -342,8 +415,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         long id = db.insert(TABLE_USERS, null, values);
         db.close();
+        // Sincronizar con Firebase
+        syncUserToFirebase(nombre, email, contrasena, bando, casa);
         return id;
     }
+
 
     // Método para validar el login del usuario
     public boolean validarLogin(String nickname, String password, String bando) {
@@ -355,6 +431,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return isValid;
     }
+
+    public void validarLoginFirebase(String nickname, String password, OnLoginListener listener) {
+        firestore.collection("users")
+                .whereEqualTo("nombre", nickname)
+                .whereEqualTo("contrasena", password)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        listener.onSuccess();
+                    } else {
+                        listener.onFailure("Usuario o contraseña incorrectos");
+                    }
+                })
+                .addOnFailureListener(e -> listener.onFailure("Error en la conexión a Firebase"));
+    }
+
+    public interface OnLoginListener {
+        void onSuccess();
+        void onFailure(String message);
+    }
+
 
     // Método para eliminar un usuario por su nickname
     public boolean eliminarUsuarioPorNickname(String nickname) {

@@ -32,7 +32,7 @@ public class BlackFactionCharactersActivity extends AppCompatActivity {
         dbHelper = new DatabaseHelper(this);
 
         // Obtener todos los personajes desde la base de datos
-        List<Character> characterList = dbHelper.getAllCharacters();
+        List<Character> characterList = dbHelper.getAllBlackCharacters();
 
         // Configurar el RecyclerView
         recyclerView = findViewById(R.id.blackFactionRecyclerView);
