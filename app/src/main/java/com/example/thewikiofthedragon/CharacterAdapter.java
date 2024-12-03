@@ -34,8 +34,16 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
     @Override
     public void onBindViewHolder(@NonNull CharacterViewHolder holder, int position) {
-        holder.bind(characterList.get(position), listener);
+        // Obtén el personaje correspondiente a la posición actual
+        Character character = characterList.get(position);
+
+        // Vincula los datos con el ViewHolder
+        holder.bind(character, listener);
+
+        // Agrega un log para depurar el personaje y su imagen
+        Log.d("AdapterBinding", "Personaje: " + character.getName() + ", Imagen: " + character.getImageResId());
     }
+
 
     @Override
     public int getItemCount() {

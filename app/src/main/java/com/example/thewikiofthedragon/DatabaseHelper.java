@@ -16,7 +16,7 @@ import java.util.Map;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "dragonDatabase.db";
-    private static final int DATABASE_VERSION = 4; // Incrementa la versión para activar onUpgrade
+    private static final int DATABASE_VERSION = 5; // Incrementa la versión para activar onUpgrade
     private FirebaseFirestore firestore;
 
     // Tabla de personajes
