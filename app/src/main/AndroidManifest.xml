@@ -13,6 +13,11 @@
             android:name=".BlackFactionActivity"
             android:exported="false" />
 
+        <activity android:name=".TriviaActivity"></activity>
+
+        <activity android:name=".ResultActivity" />
+
+
         <activity
             android:name=".BlackFactionCharactersActivity"
             android:exported="false" />

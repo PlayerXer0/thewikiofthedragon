@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- VideoView de fondo -->
+    <VideoView
+        android:id="@+id/backgroundVideoViewTrivia"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <!-- Contenedor de la trivia (frontal) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#66000000"
+        android:gravity="center">
+
+        <!-- Pregunta -->
+        <TextView
+            android:id="@+id/questionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gold_text"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:gravity="center" />
+
+        <!-- Opciones -->
+        <RadioGroup
+            android:id="@+id/optionsRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Botón siguiente -->
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Siguiente"
+            android:background="@color/red_background"
+            android:textColor="@color/gold_text"
+            android:padding="12dp"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+    <!-- Botón de música en la esquina superior derecha -->
+    <ImageButton
+        android:id="@+id/btnToggleMusicTrivia"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:scaleType="fitXY"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_on_n"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Control de música" />
+</RelativeLayout>
